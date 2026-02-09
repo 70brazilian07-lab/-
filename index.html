@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الزر المشاغب</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+            overflow: hidden; /* عشان الإيموجيهات متعملش سكرول للشاشة */
+            font-family: sans-serif;
+        }
+
+        .circular-button {
+            width: 200px;
+            height: 200px;
+            background-color: #ff0000;
+            color: white;
+            border: 8px solid #990000;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            transition: all 0.1s ease;
+            z-index: 10; /* عشان يفضل فوق الإيموجيهات */
+            outline: none;
+        }
+
+        .circular-button:active {
+            transform: scale(0.9);
+        }
+
+        /* تنسيق الإيموجي اللي هيظهر */
+        .emoji {
+            position: absolute;
+            font-size: 50px;
+            pointer-events: none; /* عشان ميعطلش الضغط على الزر */
+            animation: fadeUp 1s forwards;
+        }
+
+        @keyframes fadeUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="circular-button" onclick="showEmoji()">
+        دوسي يا بيضه هنا
+    </button>
+
+    <script>
+        function showEmoji() {
+            const emoji = document.createElement('div');
+            emoji.innerText = '🖕';
+            emoji.className = 'emoji';
+            
+            // تحديد مكان عشوائي للإيموجي حول الزر
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            emoji.style.left = x + 'px';
+            emoji.style.top = y + 'px';
+            
+            document.body.appendChild(emoji);
+            
+            // مسح الإيموجي من الصفحة بعد ثانية عشان الزحمة
+            setTimeout(() => {
+                emoji.remove();
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
